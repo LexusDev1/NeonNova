@@ -14,7 +14,7 @@ if __name__ == "__main__":
                 elif command == "g":
                     os.system("git add .")
                     os.system("git commit -m 'Updated code'")
-                    os.system("git push")
+                    os.system("git push origin main")
             else:
                 os.system(command)
     except KeyboardInterrupt:
