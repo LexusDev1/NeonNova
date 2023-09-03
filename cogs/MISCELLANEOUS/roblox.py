@@ -33,7 +33,7 @@ class Roblox(commands.Cog):
             await interaction.response.send_message(f"❌ An error occurred: `{e}`")
   
     @nextcord.slash_command(description="Sends the group information")
-    async def group(self, interaction: nextcord.Interaction, group: int = None):
+    async def groupinfo(self, interaction: nextcord.Interaction, group: int = None):
         if group is None:
             await interaction.response.send_message("Please provide a valid group ID.")
             return
@@ -72,6 +72,5 @@ class Roblox(commands.Cog):
             embed.add_field(name="STATUS", value=f"{status!r}")
             embed.add_field(name="DESCRIPTION", value=f"{user.description!r}")
             await interaction.response.send_message(embed=embed)
-
 def setup(client):
     client.add_cog(Roblox(client))
