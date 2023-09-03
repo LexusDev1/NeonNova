@@ -60,17 +60,21 @@ class Roblox(commands.Cog):
             await interaction.response.send_message(f"❌ An error occurred: `{e}`")
             
     @nextcord.slash_command(description="Looks for the user information")
-    async def rblxuser(self, interaction: nextcord.Interaction, *, userNames: str):
-        users = await self.roblox.get_users_by_usernames(userNames, expand=True)
-        for user in users:
-            status = await self.roblox.get_status()
-            embed = nextcord.Embed(title=f"Information for {userNames}")
-            embed.add_field(name="NAME", value=user.name)
-            embed.add_field(name="ID", value=user.id)
-            embed.add_field(name="DISPLAY NAME", value=user.display_name)
-            embed.add_field(name="CREATED", value=user.created.strftime("%m/%d/%Y, %H:%M:%S"))
-            embed.add_field(name="STATUS", value=f"{status!r}")
-            embed.add_field(name="DESCRIPTION", value=f"{user.description!r}")
-            await interaction.response.send_message(embed=embed)
+    async def rblxuser(self, interaction: nextcord.Interaction, *, usernames: str):
+        try:
+            users = await self.roblox.get_users_by_usernames(usernames, expand=True)
+            for user in users:
+                status = await self.roblox.get_status()
+                embed = nextcord.Embed(title=f"Information for {usernames}")
+                embed.add_field(name="NAME", value=user.name)
+                embed.add_field(name="ID", value=user.id)
+                embed.add_field(name="DISPLAY NAME", value=user.display_name)
+                embed.add_field(name="CREATED", value=user.created.strftime("%m/%d/%Y, %H:%M:%S"))
+                embed.add_field(name="STATUS", value=f"{status!r}")
+                embed.add_field(name="DESCRIPTION", value=f"{user.description!r}")
+                await interaction.response.send_message(embed=embed)
+        except Exception as e:
+            await interaction.response.send_message(f"❌ An error occurred: `{e}`")
+
 def setup(client):
     client.add_cog(Roblox(client))
