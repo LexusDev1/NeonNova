@@ -1,0 +1,5 @@
+pyyaml
+nextcord
+aiosqlite
+ro.py
+humanfriendly

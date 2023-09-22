@@ -12,7 +12,7 @@ class Timeout(commands.Cog):
     async def timeout(self, interaction: nextcord.Interaction, member: nextcord.Member, time, *, reason=None):
         time = humanfriendly.parse_timespan(time)
         guild = interaction.guild
-        member = guild.get_member(member.id)  # Retrieve the member from the guild
+        member = guild.get_member(member.id)
         
         try:
             await member.edit(timeout=datetime.timedelta(minutes=time))
